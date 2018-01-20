@@ -28,7 +28,8 @@
             <br/>
             <div>
                 <label for="price">Price:</label>
-                <input type="number" name="price" id="price" th:text="${product.price}"  min="0" step="1" data-bind="value:replyNumber" />
+                <input type="number" name="price" id="price" th:text="${product.price}" min="0" step="1"
+                       data-bind="value:replyNumber"/>
             </div>
             <button type="submit" id="submit" class="btn btn-primary">Submit</button>
         </form>

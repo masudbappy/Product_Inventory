@@ -10,7 +10,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
@@ -20,23 +20,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 
         http.csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/","/home","/about").permitAll()
-                    .antMatchers("/admin").hasAnyRole("ADMIN")
-                    .antMatchers("/user").hasAnyRole("USER")
-                    .anyRequest().authenticated()
-                    .and()
+                .antMatchers("/", "/home", "/about").permitAll()
+                .antMatchers("/admin").hasAnyRole("ADMIN")
+                .antMatchers("/user").hasAnyRole("USER")
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
-                    .loginPage("/login")
-                    .permitAll()
-                    .and()
+                .loginPage("/login")
+                .permitAll()
+                .and()
                 .logout()
-                    .permitAll()
-                    .and()
+                .permitAll()
+                .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER")
