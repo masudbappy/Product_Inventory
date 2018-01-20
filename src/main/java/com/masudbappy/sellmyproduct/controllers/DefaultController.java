@@ -34,40 +34,39 @@ public class DefaultController {
         return "/admin";
     }
 
-    @RequestMapping(value = "/addProduct",method = RequestMethod.GET)
-    public String addProduct(){
-        return "/addProduct";
-    }
-
-    @RequestMapping(value = "/admin",method = RequestMethod.POST)
-    public String submit(@Valid @ModelAttribute("product")Product product,
-                         BindingResult result, ModelMap modelMap){
-        if (result.hasErrors()){
-            return "error/403";
-        }
-        modelMap.addAttribute("name", product.getName());
-        modelMap.addAttribute("type",product.getType());
-        modelMap.addAttribute("price",product.getPrice());
-        return "admin";
-    }
-
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable long id) {
         productRepo.delete(id);
         return new ModelAndView("redirect:/admin");
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView update(@RequestParam("post_id") long id,
-                               @RequestParam("message") String message) {
-        Product product = productRepo.findOne(id);
+    @RequestMapping(value = "/addProduct",method = RequestMethod.GET)
+    public String addProduct(){
+        return "/addProduct";
+    }
 
+    @RequestMapping(value = "/create" , method = RequestMethod.POST)
+    public ModelAndView create (@RequestParam("name")String name, @RequestParam("type")String type,
+                                @RequestParam("price")double price){
+        productRepo.save(new Product(name,type,price));
+        return new ModelAndView("redirect:/admin");
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ModelAndView update(@RequestParam("id") long id, @RequestParam("name")String name,
+                               @RequestParam("type")String type, @RequestParam("price")double price) {
+        Product product = productRepo.findOne(id);
+        product.setName(name);
+        product.setType(type);
+        product.setPrice(price);
+        productRepo.save(product);
         return new ModelAndView("redirect:/admin");
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-    public String edit(@PathVariable long id,
-                       Model model) {
+    public String edit(@PathVariable long id, Model model) {
+        Product product = productRepo.findOne(id);
+        model.addAttribute("product",product);
         return "/edit";
     }
 

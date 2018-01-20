@@ -14,19 +14,21 @@
 
         <form method="post" name="comment_form" id="comment_form" action="/update" role="form">
             <div class="form-group">
-                <label for="product">Name:</label>
-                <input type="text" class="form-control" id="product"/>
+                <label for="name">Name:</label>
+                <input type="text" id="name" class="form-control" name="name" th:text="${product.name}"/>
             </div>
             <div class="form-group">
-                <label for="sel1">Select Category:</label>
-                <select class="form-control" id="sel1">
+                <label for="type">Select Category:</label>
+                <select class="form-control" name="type" id="type" th:value="${product.type}">
                     <option>RAM</option>
                     <option>MOTHER BOARD</option>
                     <option>GRAPICS CARD</option>
                 </select>
             </div>
+            <br/>
             <div>
-                <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber" />
+                <label for="price">Price:</label>
+                <input type="number" name="price" id="price" th:text="${product.price}"  min="0" step="1" data-bind="value:replyNumber" />
             </div>
             <button type="submit" id="submit" class="btn btn-primary">Submit</button>
         </form>
