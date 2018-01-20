@@ -47,7 +47,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView update(@RequestParam("id") long id, @RequestParam("name") String name,
+    public ModelAndView update(@RequestParam("id") Long id, @RequestParam("name") String name,
                                @RequestParam("type") String type, @RequestParam("price") double price) {
         Product product = productRepo.findOne(id);
         product.setName(name);
@@ -58,7 +58,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-    public String edit(@PathVariable long id, Model model) {
+    public String edit(@PathVariable Long id, Model model) {
         Product product = productRepo.findOne(id);
         model.addAttribute("product", product);
         return "/edit";
