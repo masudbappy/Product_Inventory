@@ -14,6 +14,53 @@
 
                 <h1>Admin page</h1>
                 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+                <a class="btn btn-primary" th:href="@{/addProduct}">Add Product</a>
+                <br/>
+
+                <table class="table table-striped" id="product_list">
+
+                    <thead>
+
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Price</th>
+                            <th>Delete</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr data-th-each="product : ${products}">
+                            <td class="name" data-th-text="${product.name}"></td>
+
+                            <td class="type" data-th-text="${product.type}"></td>
+
+                            <td class="type" data-th-text="${product.price}"></td>
+                            <td>
+                                <a th:href="@{'/{id}/delete'(id=${product.id})}" class="delete" th:attr="name=${product.name}">
+                        <span class="fa-stack">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </span>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a th:href="@{'/{id}/edit'(id=${product.id})}" class="edit" th:attr="name=${product.name}">
+                    <span class="fa-stack">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </span>
+
+                                </a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <br/><br/>
                 <form th:action="@{/logout}" method="post">
                     <input type="submit" value="Sign Out"/>
                 </form>

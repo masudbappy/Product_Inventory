@@ -1,5 +1,6 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf- extras-springsecurity4">
 
 <head>
     <div th:replace="fragments/header :: header-css"/>
@@ -16,6 +17,7 @@
                 <fieldset>
                     <h1>Please Sign In</h1>
 
+                    <!--/*@thymesVar id="error" type=""*/-->
                     <div th:if="${param.error}">
                         <div class="alert alert-danger">
                             Invalid username and password.

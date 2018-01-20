@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"/>
+<div class="container">
+
+    <div class="starter-template">
+
+        <form method="post" name="comment_form" id="comment_form" action="/update" role="form">
+            <div class="form-group">
+                <label for="product">Name:</label>
+                <input type="text" class="form-control" id="product"/>
+            </div>
+            <div class="form-group">
+                <label for="sel1">Select Category:</label>
+                <select class="form-control" id="sel1">
+                    <option>RAM</option>
+                    <option>MOTHER BOARD</option>
+                    <option>GRAPICS CARD</option>
+                </select>
+            </div>
+            <div>
+                <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber" />
+            </div>
+            <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+
+
+</html>
